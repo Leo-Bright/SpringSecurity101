@@ -13,11 +13,13 @@ public class DemoController {
     @Autowired
     OAuth2RestTemplate restTemplate;
 
+    //演示登录后才能访问的安全页面
     @GetMapping("/securedPage")
     public ModelAndView securedPage(OAuth2Authentication authentication) {
         return new ModelAndView("securedPage").addObject("authentication", authentication);
     }
 
+    //演示通过OAuth2RestTemplate调用受保护资源
     @GetMapping("/remoteCall")
     public String remoteCall() {
         ResponseEntity<String> responseEntity = restTemplate.getForEntity("http://localhost:8081/user/name", String.class);
